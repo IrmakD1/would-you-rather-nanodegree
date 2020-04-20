@@ -1,0 +1,19 @@
+.App {
+  text-align: center;
+}
+
+.header {
+  padding: 20px;
+  background: #5171b6;
+  text-align: center;
+  color: aliceblue;
+  margin-bottom: 1.25rem;
+}
+
+.container {
+  margin: 1rem;
+}
+
+/* .nav-panel {
+  width: 7rem;
+} */
