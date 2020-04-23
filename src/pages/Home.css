@@ -1,0 +1,19 @@
+.home-page {
+    text-align: center;
+ }
+ 
+ .nav-panel {
+     width: 10rem;
+     margin-right: -10rem;
+     float: left;
+ }
+ 
+ .home-content {
+     display: inline-block;
+ }
+
+.user-avatar-panel {
+    text-align: right;
+}
+
+ 

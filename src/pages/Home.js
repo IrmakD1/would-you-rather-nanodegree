@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import NavigationPanel from '../components/NavigationPanel'
+import UserAvatar from '../components/UserAvatar'
+import { connect } from 'react-redux';
+import './Home.css'
 
-export default class Home extends Component {
+class Home extends Component {
     render() {
-        const { pageTitle, pages } = this.props
+        const { pageTitle, pages, authedUser } = this.props
         return(
             <div className='home-page'>
                 <div className='nav-panel'>
@@ -11,8 +14,21 @@ export default class Home extends Component {
                     pageTitle={pageTitle}
                     pages={pages}/>
                 </div>
-                <div className='home-content'>Home</div>
+                <div className='user-avatar-panel'>
+                    <UserAvatar user={authedUser}/>
+                </div>
+                <div className='home-content'>
+                    <h4>Would You Rather Questions...</h4>
+                </div>
             </div>
         )
     }
 }
+
+function mapStateToProps ({authedUser}) {
+    return {
+        authedUser: authedUser
+    }
+}
+
+export default connect(mapStateToProps)(Home)

@@ -21,7 +21,7 @@
 .button-is-primary {
     display: inline-block;
     padding: 0.35em 1.2em;
-    border: 0.1em solid red;
+    border: 0.2em solid lightblue;
     margin: 0 0.3em 0.3em 0;
     border-radius: 0.12em;
     box-sizing: border-box;
@@ -30,7 +30,8 @@
     font-family: 'Roboto',sans-serif;
     font-weight: 300;
     font-size: medium;
-    color: red;
+    color: aliceblue;
+    background-color: #5171b6;
     text-align: center;
     transition: all 0.2;
 }

@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
+import _ from 'lodash'
 import './LoginForm.css'
+import { connect } from 'react-redux';
+import { setAuthedUser } from '../actions/authedUser'
 
-export default class LoginForm extends Component {
+class LoginForm extends Component {
     state = {
         text: '', 
         toHome: false,
         error: false
     }
-
-    userList = [
-        'Johnny',
-        'Lisa',
-        'Mark'
-    ]
 
     handleChange = (e) => {
         const text = e.target.value
@@ -27,9 +24,11 @@ export default class LoginForm extends Component {
         e.preventDefault()
 
         const { text } = this.state
-
-        this.userList.forEach(user => {
-            if(text === user) {
+        const { dispatch, users } = this.props
+        
+        _.forEach(users, user => {
+            if(text === user.id) {
+                dispatch(setAuthedUser(user.id))
                 this.setState(() => ({
                     toHome: true
                 }))
@@ -38,7 +37,7 @@ export default class LoginForm extends Component {
                     error: true
                 }))
             }
-        });
+        })
 
         this.setState(() => ({
             text: ''
@@ -62,7 +61,6 @@ export default class LoginForm extends Component {
                     value={text}
                     onChange={this.handleChange}
                 />
-
                 <button 
                 type='submit'
                 disabled={text === ''}>
@@ -90,3 +88,5 @@ export default class LoginForm extends Component {
         )
     }
 }
+
+export default connect()(LoginForm)
