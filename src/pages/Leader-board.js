@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
 import NavigationPanel from '../components/NavigationPanel'
 
-export default class Leaderboard extends Component {
+class Leaderboard extends Component {
     render() {
+        const { authedUser } = this.props
+
+        if (authedUser === null) {
+            return <Redirect to='/' />
+        }
+
         const { pageTitle, pages } = this.props
         return(
             <div className='leader-board-page'>
@@ -16,3 +24,11 @@ export default class Leaderboard extends Component {
         )
     }
 }
+
+function mapStateToProps ({authedUser}) {
+    return {
+        authedUser: authedUser
+    }
+}
+
+export default connect(mapStateToProps)(Leaderboard)

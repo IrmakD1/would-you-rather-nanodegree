@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
 import NavigationPanel from '../components/NavigationPanel'
 
-export default class NewQuestion extends Component {
+class NewQuestion extends Component {
     render() {
+        const { authedUser } = this.props
+
+        if (authedUser === null) {
+            return <Redirect to='/' />
+        }
+
         const { pageTitle, pages } = this.props
         return(
             <div className='new-question-page'>
@@ -16,3 +24,11 @@ export default class NewQuestion extends Component {
         )
     }
 }
+
+function mapStateToProps ({authedUser}) {
+    return {
+        authedUser: authedUser
+    }
+}
+
+export default connect(mapStateToProps)(NewQuestion)
