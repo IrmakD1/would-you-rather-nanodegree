@@ -6,6 +6,7 @@ import Button from './Button'
 import './ButtonGroup.css'
 
 export default class ButtonGroup extends React.Component {
+
     render() {
         const { pages, pageTitle } = this.props
         return(

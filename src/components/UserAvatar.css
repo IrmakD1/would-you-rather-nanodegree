@@ -2,3 +2,21 @@
     padding-left: 85%;
     padding-right: 0.2rem;
 }
+
+.logout-button {
+    display: inline-block;
+    padding: 0.35em 1.2em;
+    padding-left: 0.9rem;
+    border: 0.1em solid #5171b6;
+    margin: 0 0.3em 0.3em 0;
+    border-radius: 0.12em;
+    box-sizing: border-box;
+    width: 5rem;
+    text-decoration: none;
+    font-family: 'Roboto',sans-serif;
+    font-weight: 300;
+    font-size: medium;
+    color: black;
+    text-align: center;
+    transition: all 0.2;
+}

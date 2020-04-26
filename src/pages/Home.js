@@ -21,7 +21,7 @@ class Home extends Component {
                     pages={pages}/>
                 </div>
                 <div className='user-avatar-panel'>
-                    <UserAvatar user={authedUser}/>
+                    <UserAvatar />
                 </div>
                 <div className='home-content'>
                     <h4>Would You Rather Questions...</h4>

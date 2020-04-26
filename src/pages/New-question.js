@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import NavigationPanel from '../components/NavigationPanel'
+import UserAvatar from '../components/UserAvatar'
 
 class NewQuestion extends Component {
     render() {
@@ -18,6 +19,9 @@ class NewQuestion extends Component {
                     < NavigationPanel 
                     pageTitle={pageTitle}
                     pages={pages}/>
+                </div>
+                <div className='user-avatar-panel'>
+                    <UserAvatar />
                 </div>
                 <div className='new-question-content'>New Question</div>
             </div>

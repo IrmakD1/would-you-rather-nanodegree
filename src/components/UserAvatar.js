@@ -1,13 +1,36 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { removeAuthedUser } from '../actions/authedUser'
 import './UserAvatar.css'
 
-export default class UserAvatar extends Component {
+class UserAvatar extends Component {
+    
+    handleClick = (e) => {
+        e.preventDefault()
+        const { dispatch } = this.props
+        dispatch(removeAuthedUser())
+    }
+    
     render() {
-        const { user } = this.props
+        const { authedUser } = this.props
         return(
         <div className='user-avatar'>
-            <p>User: {user}</p>
+            <p>User: {authedUser}</p>
+            <button 
+                className='logout-button'
+                onClick={this.handleClick}>
+                    Logout
+            </button>
         </div>
         )
     }
 }
+
+function mapStateToProps ({ authedUser }) {
+    return {
+        authedUser: authedUser
+    }
+}
+
+
+export default connect(mapStateToProps)(UserAvatar)

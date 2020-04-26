@@ -12,10 +12,9 @@ class App extends Component {
   
   //Can I move this into the store?
   pages = [
-    { name: 'Sign in/out', root: '/' , id: 1 },
-    { name: 'Home', root: '/home', id: 2 },
-    { name: 'New Question', root: '/new', id: 3 },
-    { name: 'Leader Board', root: '/leaderboard', id: 4 },
+    { name: 'Home', root: '/home', id: 1 },
+    { name: 'New Question', root: '/new', id: 2 },
+    { name: 'Leader Board', root: '/leaderboard', id: 3 },
   ]
 
   componentDidMount() {
