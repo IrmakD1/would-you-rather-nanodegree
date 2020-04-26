@@ -1,18 +1,30 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
+import LoginForm from '../components/LoginForm'
 import NavigationPanel from '../components/NavigationPanel'
 import UserAvatar from '../components/UserAvatar'
+import './New-question.css'
 
 class NewQuestion extends Component {
     render() {
-        const { authedUser } = this.props
+        const { authedUser, users, pageTitle, pages } = this.props
 
         if (authedUser === null) {
-            return <Redirect to='/' />
+            return (
+                <div className='new-question-page'>
+                    <div className='nav-panel'>
+                        < NavigationPanel 
+                            pageTitle={pageTitle}
+                            pages={pages}/>
+                    </div>
+                    <div className='login-content'>
+                        <h4>Please Select Your Login Details</h4>
+                        <LoginForm users={users}/>
+                    </div>
+            </div>
+            )
         }
 
-        const { pageTitle, pages } = this.props
         return(
             <div className='new-question-page'>
                 <div className='nav-panel'>
@@ -29,9 +41,10 @@ class NewQuestion extends Component {
     }
 }
 
-function mapStateToProps ({authedUser}) {
+function mapStateToProps ({ users, authedUser }) {
     return {
-        authedUser: authedUser
+        users,
+        authedUser
     }
 }
 

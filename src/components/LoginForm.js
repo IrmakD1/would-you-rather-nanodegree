@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom'
 import _ from 'lodash'
 import './LoginForm.css'
 import { connect } from 'react-redux';
@@ -29,9 +28,6 @@ class LoginForm extends Component {
         _.forEach(users, user => {
             if(text === user.id) {
                 dispatch(setAuthedUser(user.id))
-                this.setState(() => ({
-                    toHome: true
-                }))
             } else {
                 this.setState(() => ({
                     error: true
@@ -45,11 +41,7 @@ class LoginForm extends Component {
     }
 
     render() {
-        const { text, toHome, error } = this.state
-
-        if (toHome === true) {
-            return <Redirect to='/home' />
-        }
+        const { text, error } = this.state
 
         if (error === true) {
             return (

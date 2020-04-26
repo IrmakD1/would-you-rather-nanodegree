@@ -1,4 +1,4 @@
-.home-page {
+.new-question-page {
     text-align: center;
  }
  
@@ -8,7 +8,7 @@
      float: left;
  }
  
- .home-content {
+ .new-question-content {
      display: inline-block;
  }
 

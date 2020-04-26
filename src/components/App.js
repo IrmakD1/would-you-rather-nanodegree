@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { handleInitialData } from '../actions/shared'
 import { connect } from 'react-redux'
-import Login from '../pages/Login'
 import Home from '../pages/Home'
 import NewQuestion from '../pages/New-question'
 import Leaderboard from '../pages/Leader-board'
@@ -12,7 +11,7 @@ class App extends Component {
   
   //Can I move this into the store?
   pages = [
-    { name: 'Home', root: '/home', id: 1 },
+    { name: 'Home', root: '/', id: 1 },
     { name: 'New Question', root: '/new', id: 2 },
     { name: 'Leader Board', root: '/leaderboard', id: 3 },
   ]
@@ -28,12 +27,7 @@ class App extends Component {
              <h2>Would You Rather..?</h2>
            </div>
           <div className='container'>
-            <Route exact path='/' render={() => (
-              <Login 
-                pageTitle='Login'
-                pages={this.pages}/>
-            )}/>
-           <Route path='/home' render={() => (
+           <Route exact path='/' render={() => (
               <Home 
                 pageTitle='Home'
                 pages={this.pages}/>

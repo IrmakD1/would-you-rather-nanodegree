@@ -1,16 +1,28 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom'
+import LoginForm from '../components/LoginForm'
 import NavigationPanel from '../components/NavigationPanel'
 import UserAvatar from '../components/UserAvatar'
 import './Home.css'
 
 class Home extends Component {
     render() {
-        const { pageTitle, pages, authedUser } = this.props
+        const { pageTitle, pages, authedUser, users } = this.props
 
         if (authedUser === null) {
-            return <Redirect to='/' />
+            return (
+                <div className='home-page'>
+                    <div className='nav-panel'>
+                        < NavigationPanel 
+                            pageTitle={pageTitle}
+                            pages={pages}/>
+                    </div>
+                    <div className='login-content'>
+                        <h4>Please Select Your Login Details</h4>
+                        <LoginForm users={users}/>
+                    </div>
+            </div>
+            )
         }
 
         return(
@@ -31,9 +43,10 @@ class Home extends Component {
     }
 }
 
-function mapStateToProps ({authedUser}) {
+function mapStateToProps ({users, authedUser}) {
     return {
-        authedUser: authedUser
+        users,
+        authedUser
     }
 }
 
