@@ -47,21 +47,21 @@ class Home extends Component {
         const { displayAnswered, answeredButton, unansweredButton } = this.state
         
 
-        // if (authedUser === null) {
-        //     return (
-        //         <div className='home-page'>
-        //             <div className='nav-panel'>
-        //                 < NavigationPanel 
-        //                     pageTitle={pageTitle}
-        //                     pages={pages}/>
-        //             </div>
-        //             <div className='login-content'>
-        //                 <h4>Please Select Your Login Details</h4>
-        //                 <LoginForm users={users}/>
-        //             </div>
-        //     </div>
-        //     )
-        // }
+        if (authedUser === null) {
+            return (
+                <div className='home-page'>
+                    <div className='nav-panel'>
+                        < NavigationPanel 
+                            pageTitle={pageTitle}
+                            pages={pages}/>
+                    </div>
+                    <div className='login-content'>
+                        <h4>Please Select Your Login Details</h4>
+                        <LoginForm users={users}/>
+                    </div>
+            </div>
+            )
+        }
 
         return(
             <div className='home-page'>
