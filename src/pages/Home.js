@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash'
 import LoginForm from '../components/LoginForm'
 import NavigationPanel from '../components/NavigationPanel'
 import UserAvatar from '../components/UserAvatar'
@@ -34,6 +35,45 @@ class Home extends Component {
         
     }
 
+    //Should I move this to the store?
+    resetState = () => {
+        this.setState(() => ({
+            displayAnswered: false,
+            answeredButton: {
+                primary: false
+            },
+            unansweredButton: {
+                primary: true
+            }
+        }))
+    }
+
+    getAnsweredQuestionList = (displayAnswered) => {
+        const { authedUser, questions } = this.props
+        if (displayAnswered == false) {
+            const unansweredIds = _.map(questions, question => {
+                if(!(_.includes(question.optionOne.votes, authedUser)) && !(_.includes(question.optionTwo.votes, authedUser))) {
+                    return question.id
+                } else {
+                    return null
+                }
+            })
+            const filteredUnansweredIds = _.filter(unansweredIds, id => id != null)
+            return filteredUnansweredIds
+        }
+        if (displayAnswered == true) {
+            const answeredIds = _.map(questions, question => {
+                if (_.includes(question.optionOne.votes, authedUser) || _.includes(question.optionTwo.votes, authedUser)) {
+                    return question.id
+                } else {
+                    return null
+                }
+            })
+            const filteredAnsweredIds = _.filter(answeredIds, id => id != null)
+            return filteredAnsweredIds
+        }
+    }
+
     checkStyle = (buttonName) => {
         const { answeredButton, unansweredButton } = this.state
         if(buttonName === unansweredButton && unansweredButton.primary === true) return 'primary'
@@ -57,7 +97,7 @@ class Home extends Component {
                     </div>
                     <div className='login-content'>
                         <h4>Please Select Your Login Details</h4>
-                        <LoginForm users={users}/>
+                        <LoginForm users={users} resetState={this.resetState}/>
                     </div>
             </div>
             )
@@ -88,7 +128,7 @@ class Home extends Component {
                             Answered
                     </button>
                     <ul className='questions-list'>
-                        {questionIds.map((id) => (
+                        {this.getAnsweredQuestionList(displayAnswered).map((id) => (
                             <li key={id}>
                                 <Question id={id}/>
                             </li>
@@ -104,8 +144,9 @@ function mapStateToProps ({users, authedUser, questions}) {
     return {
         users,
         authedUser,
-        questionIds:  Object.keys(questions)
-        .sort((a,b) => questions[b].timestamp - questions[a].timestamp)
+        questions,
+        // questionIds:  Object.keys(questions)
+        // .sort((a,b) => questions[b].timestamp - questions[a].timestamp)
     }
 }
 

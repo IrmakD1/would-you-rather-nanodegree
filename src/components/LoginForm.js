@@ -23,7 +23,7 @@ class LoginForm extends Component {
         e.preventDefault()
 
         const { text } = this.state
-        const { dispatch, users } = this.props
+        const { dispatch, users, resetState } = this.props
         
         _.forEach(users, user => {
             if(text === user.id) {
@@ -38,6 +38,7 @@ class LoginForm extends Component {
         this.setState(() => ({
             text: ''
         }))
+        resetState()
     }
 
     render() {

@@ -8,7 +8,6 @@ class Question extends Component {
     render() {
         const { question } = this.props
         const { optionOne, optionTwo, timestamp } = question
-        console.log(question);
         
         return (
             <div className='question-info'>
