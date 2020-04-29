@@ -7,20 +7,22 @@ import './Question.css'
 class Question extends Component {
     render() {
         const { question } = this.props
-        const { optionOne, optionTwo, timestamp } = question
+        const { optionOne, optionTwo, timestamp, id } = question
         
         return (
-            <div className='question-info'>
-                <h5>Would You Rather?</h5>
-                <div>
-                    <p>{optionOne.text}</p>
-                    <span>OR</span>
+            <Link to={`/question/${id}`} className='question'>
+                <div className='question-info'>
+                    <h5>Would You Rather?</h5>
+                    <div>
+                        <p>{optionOne.text}</p>
+                        <span>OR</span>
+                    </div>
+                    <div>
+                        <p>{optionTwo.text}</p>
+                    </div>
+                    <div className='date'>{formatDate(timestamp)}</div>
                 </div>
-                <div>
-                    <p>{optionTwo.text}</p>
-                </div>
-                <div className='date'>{formatDate(timestamp)}</div>
-            </div>
+            </Link>
         )
     }
 }
@@ -33,4 +35,4 @@ function mapStateToProps ({ questions }, {id} ) {
     }
 }
 
-export default connect(mapStateToProps)(Question)
+export default withRouter(connect(mapStateToProps)(Question))

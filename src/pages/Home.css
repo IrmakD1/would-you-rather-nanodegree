@@ -22,7 +22,7 @@ h5 {
     font-weight: bold;
 }
 
-.questions-list {
+.question {
     width: 100%;
     max-width: 590px;
     display: grid;
