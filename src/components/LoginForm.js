@@ -3,12 +3,23 @@ import _ from 'lodash'
 import './LoginForm.css'
 import { connect } from 'react-redux';
 import { setAuthedUser } from '../actions/authedUser'
+import { setHomeState } from '../actions/homeState'
 
 class LoginForm extends Component {
     state = {
         text: '', 
         toHome: false,
         error: false
+    }
+
+    defaultHomeState = {
+        displayAnswered: false,
+        answeredButton: {
+            primary: false
+            },
+        unansweredButton: {
+            primary: true
+            }
     }
 
     handleChange = (e) => {
@@ -38,7 +49,7 @@ class LoginForm extends Component {
         this.setState(() => ({
             text: ''
         }))
-        resetState()
+        dispatch(setHomeState(this.defaultHomeState))
     }
 
     render() {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash'
+import { toggleHomeState, setHomeState } from '../actions/homeState'
 import LoginForm from '../components/LoginForm'
 import NavigationPanel from '../components/NavigationPanel'
 import UserAvatar from '../components/UserAvatar'
@@ -9,43 +10,23 @@ import './Home.css'
 
 class Home extends Component {
 
-    state = {
+    defaultHomeState = {
         displayAnswered: false,
         answeredButton: {
             primary: false
-        },
+            },
         unansweredButton: {
             primary: true
-        }
+            }
+    }
+    
+    componentDidMount() {
+        this.props.dispatch(setHomeState(this.defaultHomeState))
     }
 
     handleChange = (e) => {
         e.preventDefault()
-
-        const { displayAnswered, answeredButton, unansweredButton } = this.state
-        this.setState(() => ({
-            displayAnswered: !displayAnswered,
-            answeredButton:{
-                primary: !answeredButton.primary
-            },
-            unansweredButton: {
-                primary: !unansweredButton.primary
-            }
-        }))
-        
-    }
-
-    //Should I move this to the store?
-    resetState = () => {
-        this.setState(() => ({
-            displayAnswered: false,
-            answeredButton: {
-                primary: false
-            },
-            unansweredButton: {
-                primary: true
-            }
-        }))
+        this.props.dispatch(toggleHomeState())
     }
 
     getAnsweredQuestionList = (displayAnswered) => {
@@ -75,7 +56,8 @@ class Home extends Component {
     }
 
     checkStyle = (buttonName) => {
-        const { answeredButton, unansweredButton } = this.state
+        const { homeState } = this.props
+        const { answeredButton, unansweredButton } = homeState
         if(buttonName === unansweredButton && unansweredButton.primary === true) return 'primary'
         if(buttonName === unansweredButton && unansweredButton.primary === false) return 'secondary'
         if(buttonName === answeredButton && answeredButton.primary === true) return 'primary'
@@ -83,8 +65,7 @@ class Home extends Component {
     }
 
     render() {
-        const { pageTitle, pages, authedUser, users, questionIds } = this.props
-        const { displayAnswered, answeredButton, unansweredButton } = this.state
+        const { pageTitle, pages, authedUser, users, questionIds, homeState } = this.props
         
 
         if (authedUser === null) {
@@ -97,7 +78,7 @@ class Home extends Component {
                     </div>
                     <div className='login-content'>
                         <h4>Please Select Your Login Details</h4>
-                        <LoginForm users={users} resetState={this.resetState}/>
+                        <LoginForm users={users}/>
                     </div>
             </div>
             )
@@ -116,19 +97,19 @@ class Home extends Component {
                 <div className='home-content'>
                     <h4>Choose Wisely</h4>
                     <button 
-                        className={`button-is-${this.checkStyle(unansweredButton)}`}
-                        disabled={unansweredButton === 'primary'}
+                        className={`button-is-${this.checkStyle(homeState.unansweredButton)}`}
+                        disabled={homeState.unansweredButton === 'primary'}
                         onClick={this.handleChange}>
                             Unanswered
                     </button>
                     <button 
-                        className={`button-is-${this.checkStyle(answeredButton)}`}
-                        disabled={answeredButton === 'primary'}
+                        className={`button-is-${this.checkStyle(homeState.answeredButton)}`}
+                        disabled={homeState.answeredButton === 'primary'}
                         onClick={this.handleChange}>
                             Answered
                     </button>
                     <ul className='questions-list'>
-                        {this.getAnsweredQuestionList(displayAnswered).map((id) => (
+                        {this.getAnsweredQuestionList(homeState.displayAnswered).map((id) => (
                             <li key={id}>
                                 <Question id={id}/>
                             </li>
@@ -140,11 +121,12 @@ class Home extends Component {
     }
 }
 
-function mapStateToProps ({users, authedUser, questions}) {
+function mapStateToProps ({users, authedUser, questions, homeState}) {
     return {
         users,
         authedUser,
         questions,
+        homeState
         // questionIds:  Object.keys(questions)
         // .sort((a,b) => questions[b].timestamp - questions[a].timestamp)
     }
