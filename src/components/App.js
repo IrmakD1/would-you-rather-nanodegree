@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { handleInitialData } from '../actions/shared'
-import { setHomeState } from '../actions/homeState'
 import { connect } from 'react-redux'
 import Home from '../pages/Home'
 import NewQuestion from '../pages/New-question'

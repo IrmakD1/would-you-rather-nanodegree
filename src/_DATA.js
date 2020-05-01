@@ -2,7 +2,7 @@ let users = {
     sarahedo: {
       id: 'sarahedo',
       name: 'Sarah Edo',
-      avatarURL: '',
+      avatarURL: 'https://vignette.wikia.nocookie.net/the-room/images/a/a8/Lisa.jpg/revision/latest/top-crop/width/360/height/450?cb=20171112154627',
       answers: {
         "8xf0y6ziyjabvozdd253nd": 'optionOne',
         "6ni6ok3ym7mf1p33lnez": 'optionTwo',
@@ -14,7 +14,7 @@ let users = {
     tylermcginnis: {
       id: 'tylermcginnis',
       name: 'Tyler McGinnis',
-      avatarURL: '',
+      avatarURL: 'https://www.brownpapertickets.com/images/e/ab9/ab9ca1e4-8f89-4dae-a1f1-35060475b76d-250.gif',
       answers: {
         "vthrdm985a262al8qx3do": 'optionOne',
         "xj352vofupe1dqz9emx13r": 'optionTwo',
@@ -24,7 +24,7 @@ let users = {
     johndoe: {
       id: 'johndoe',
       name: 'John Doe',
-      avatarURL: '',
+      avatarURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Tommy-Wiseau-1.jpg/440px-Tommy-Wiseau-1.jpg',
       answers: {
         "xj352vofupe1dqz9emx13r": 'optionOne',
         "vthrdm985a262al8qx3do": 'optionTwo',
