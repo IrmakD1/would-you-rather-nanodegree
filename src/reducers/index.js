@@ -8,5 +8,5 @@ export default combineReducers({
     users,
     authedUser,
     questions,
-    homeState
+    homeState,
 })

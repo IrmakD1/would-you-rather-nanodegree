@@ -10,7 +10,7 @@ class Question extends Component {
         const { optionOne, optionTwo, timestamp, id } = question
         
         return (
-            <Link to={`/question/${id}`} className='question'>
+            <Link to={`/questions/${id}`} className='question'>
                 <div className='question-info'>
                     <h5>Would You Rather?</h5>
                     <div>

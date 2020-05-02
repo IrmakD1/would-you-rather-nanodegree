@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { handleInitialData } from '../actions/shared'
 import { connect } from 'react-redux'
+import { handleInitialData } from '../actions/shared'
 import Home from '../pages/Home'
 import NewQuestion from '../pages/New-question'
 import Leaderboard from '../pages/Leader-board'
+import QuestionDetails from './QuestionDetails'
 import './App.css';
 
 class App extends Component {
@@ -12,7 +13,7 @@ class App extends Component {
   //Can I move this into the store?
   pages = [
     { name: 'Home', root: '/', id: 1 },
-    { name: 'New Question', root: '/new', id: 2 },
+    { name: 'New Question', root: '/add', id: 2 },
     { name: 'Leader Board', root: '/leaderboard', id: 3 },
   ]
 
@@ -37,21 +38,22 @@ class App extends Component {
                 pageTitle='Leader Board'
                 pages={this.pages}/>
             )}/>
-          <Route path='/new' render={() => (
+          <Route path='/add' render={() => (
             <NewQuestion 
               pageTitle='New Question'
               pages={this.pages}/>
             )}/>
+          <Route path="/questions/:id" component={QuestionDetails} />
           </div>
       </Router>
     )
   }
 }
 
-// function mapStateToProps ({ authedUser }) {
-//   return {
-//     loading: authedUser === null
-//   }
-// }
+function mapStateToProps (questions) {
+  return {
+    questions
+  }
+}
 
-export default connect()(App)
+export default connect(mapStateToProps)(App)
