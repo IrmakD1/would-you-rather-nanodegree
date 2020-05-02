@@ -29,29 +29,40 @@ class Home extends Component {
         this.props.dispatch(toggleHomeState())
     }
 
+    orderTimestamp = (questions) => {
+        const { questionIds } = this.props 
+        const orderedIds = []
+        _.forEach(questionIds, id => {
+            _.forEach(questions, question => {
+                if (question.id === id) orderedIds.push(id)
+            })
+        })
+        return orderedIds
+    }
+
     getAnsweredQuestionList = (displayAnswered) => {
         const { authedUser, questions } = this.props
-        if (displayAnswered == false) {
-            const unansweredIds = _.map(questions, question => {
+        if (displayAnswered === false) {
+            const unanswered = _.map(questions, question => {
                 if(!(_.includes(question.optionOne.votes, authedUser)) && !(_.includes(question.optionTwo.votes, authedUser))) {
-                    return question.id
+                    return question
                 } else {
                     return null
                 }
             })
-            const filteredUnansweredIds = _.filter(unansweredIds, id => id != null)
-            return filteredUnansweredIds
+            const filteredUnanswered = _.filter(unanswered, id => id != null)
+            return this.orderTimestamp(filteredUnanswered)
         }
-        if (displayAnswered == true) {
-            const answeredIds = _.map(questions, question => {
+        if (displayAnswered === true) {
+            const answered = _.map(questions, question => {
                 if (_.includes(question.optionOne.votes, authedUser) || _.includes(question.optionTwo.votes, authedUser)) {
-                    return question.id
+                    return question
                 } else {
                     return null
                 }
             })
-            const filteredAnsweredIds = _.filter(answeredIds, id => id != null)
-            return filteredAnsweredIds
+            const filteredAnswered = _.filter(answered, id => id != null)
+            return this.orderTimestamp(filteredAnswered)
         }
     }
 
@@ -65,7 +76,7 @@ class Home extends Component {
     }
 
     render() {
-        const { pageTitle, pages, authedUser, users, questionIds, homeState } = this.props
+        const { pageTitle, pages, authedUser, users, homeState } = this.props
         
 
         if (authedUser === null) {
@@ -126,9 +137,9 @@ function mapStateToProps ({users, authedUser, questions, homeState}) {
         users,
         authedUser,
         questions,
-        homeState
-        // questionIds:  Object.keys(questions)
-        // .sort((a,b) => questions[b].timestamp - questions[a].timestamp)
+        homeState,
+        questionIds:  Object.keys(questions)
+        .sort((a,b) => questions[b].timestamp - questions[a].timestamp)
     }
 }
 
