@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import _ from 'lodash'
 import { connect } from 'react-redux';
 import { removeAuthedUser } from '../actions/authedUser'
+import { filterAvatars } from '../utils'
 import './UserAvatar.css'
 
 class UserAvatar extends Component {
@@ -11,16 +12,20 @@ class UserAvatar extends Component {
         const { dispatch } = this.props
         dispatch(removeAuthedUser())
     }
-
-    filterAvatars= (avatars) => avatars.filter(avatar => avatar != null)
     
     render() {
         const { authedUser, avatars } = this.props
         
+        if (authedUser === null) {
+            return(
+                <div></div>
+            )
+        }
+
         return(
         <div className='user-avatar'>
             <img
-            src={this.filterAvatars(avatars)}
+            src={filterAvatars(avatars)}
             alt={`Avatar of ${authedUser}`}
             className='avatar'
             />

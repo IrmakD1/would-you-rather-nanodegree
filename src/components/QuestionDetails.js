@@ -1,45 +1,65 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import LoginForm from './LoginForm'
-import NavigationPanel from './NavigationPanel'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import _ from 'lodash'
+import { Link, withRouter } from 'react-router-dom'
+import LoginForm from '../components/LoginForm'
+import { formatDate } from '../utils'
+import { filterAvatars } from '../utils'
+import './QuestionDetails.css'
 
 class QuestionDetails extends Component {
-    
-    findQuestion = () => {
-        const { questions, match: {params} } = this.props
-        const question = questions[params.id]
-        console.log(question);
-        return JSON.stringify(question)
-    }
-
     render() {
-        // if (authedUser === null) {
-        //     return (
-        //         <div className='home-page'>
-        //             <div className='nav-panel'>
-        //                 < NavigationPanel 
-        //                     pageTitle={pageTitle}
-        //                     pages={pages}/>
-        //             </div>
-        //             <div className='login-content'>
-        //                 <h4>Please Select Your Login Details</h4>
-        //                 <LoginForm users={users}/>
-        //             </div>
-        //     </div>
-        //     )
-        // }
+        const { question, authedUser, users, avatars } = this.props
+        
+        if(authedUser === null ) {
+            return (
+                <div className='login-content'>
+                        <h4>Please Select Your Login Details</h4>
+                        <LoginForm users={users}/>
+                </div>
+            )
+        }
+        
+        if (this.props.question === undefined){
+            return (
+                <h4>Loading...</h4>
+            )
+        }
 
         return (
-            <h4>{this.findQuestion()}</h4>
+            <div className='question-box'>
+            <div className='author'>
+                <img  
+                src={filterAvatars(avatars)}
+                alt={`Avatar of ${authedUser}`}
+                className='author-avatar'/>
+                <span>created by: {authedUser}</span>
+            </div>
+            <h5>Would You Rather?</h5>
+            <div>
+                <p>{question.optionOne.text}</p>
+                <button>Choose</button>
+                <span>Votes: {question.optionOne.votes.length}</span>
+            </div>
+                <p>OR</p>
+            <div>
+                <p>{question.optionTwo.text}</p>
+                <button>Choose</button>
+                <span>Votes: {question.optionTwo.votes.length}</span>
+            </div>
+            <div></div>
+            <div className='date'>{formatDate(question.timestamp)}</div>
+        </div>
         )
     }
 }
 
-function mapStateToProps ({ questions, autheduser }) {
+function mapStateToProps ({ authedUser, users }) {
     return {
-        questions,
-        autheduser
+        authedUser,
+        avatars: _.map(users, user => user.id === authedUser ? user.avatarURL : null),
+        users
     }
 }
 
-export default connect(mapStateToProps)(QuestionDetails)
+export default withRouter(connect(mapStateToProps)(QuestionDetails))

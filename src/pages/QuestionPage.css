@@ -1,0 +1,17 @@
+.question-page {
+    text-align: center;
+ }
+ 
+ .nav-panel {
+     width: 10rem;
+     margin-right: -10rem;
+     float: left;
+ }
+ 
+ .question-content {
+     display: inline-block;
+ }
+
+.login-content {
+    display: inline-block;
+}

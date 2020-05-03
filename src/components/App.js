@@ -5,7 +5,7 @@ import { handleInitialData } from '../actions/shared'
 import Home from '../pages/Home'
 import NewQuestion from '../pages/New-question'
 import Leaderboard from '../pages/Leader-board'
-import QuestionDetails from './QuestionDetails'
+import QuestionPage from '../pages/QuestionPage'
 import './App.css';
 
 class App extends Component {
@@ -43,7 +43,9 @@ class App extends Component {
               pageTitle='New Question'
               pages={this.pages}/>
             )}/>
-          <Route path="/questions/:id" component={QuestionDetails} />
+          <Route path="/questions/:id" render={(props) => (
+              <QuestionPage {...props} pages={this.pages}/>
+          )} />
           </div>
       </Router>
     )
