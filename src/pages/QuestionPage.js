@@ -15,7 +15,7 @@ class QuestionPage extends Component {
     }
 
     render() {
-        const { pages, authedUser, users } = this.props
+        const { pages, authedUser, users, questions } = this.props
         
         if (authedUser === null) {
             return (
@@ -29,6 +29,12 @@ class QuestionPage extends Component {
                         <LoginForm users={users}/>
                     </div>
             </div>
+            )
+        }
+
+        if (questions === undefined){
+            return (
+                <h3>Loading...</h3>
             )
         }
 

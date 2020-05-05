@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import Home from '../pages/Home'
 import NewQuestion from '../pages/New-question'
 import Leaderboard from '../pages/Leader-board'
 import QuestionPage from '../pages/QuestionPage'
+import NoMatch from '../components/NoMatch'
 import './App.css';
 
 class App extends Component {
@@ -28,24 +29,27 @@ class App extends Component {
              <h2>Would You Rather..?</h2>
            </div>
           <div className='container'>
+          <Switch>
            <Route exact path='/' render={() => (
-              <Home 
-                pageTitle='Home'
-                pages={this.pages}/>
+             <Home 
+             pageTitle='Home'
+             pages={this.pages}/>
             )}/>
           <Route path='/leaderboard' render={() => (
-              <Leaderboard 
-                pageTitle='Leader Board'
-                pages={this.pages}/>
+            <Leaderboard 
+            pageTitle='Leader Board'
+            pages={this.pages}/>
             )}/>
           <Route path='/add' render={() => (
             <NewQuestion 
-              pageTitle='New Question'
-              pages={this.pages}/>
+            pageTitle='New Question'
+            pages={this.pages}/>
             )}/>
           <Route path="/questions/:id" render={(props) => (
-              <QuestionPage {...props} pages={this.pages}/>
+            <QuestionPage {...props} pages={this.pages}/>
           )} />
+            <Route component={NoMatch} />
+          </Switch>
           </div>
       </Router>
     )
