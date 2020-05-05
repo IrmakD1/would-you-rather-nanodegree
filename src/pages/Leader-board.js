@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import _ from 'lodash'
 import LoginForm from '../components/LoginForm'
 import NavigationPanel from '../components/NavigationPanel'
 import UserAvatar from '../components/UserAvatar'
+import LeaderBoardList from '../components/LeaderBoardList'
 import './Leader-board.css'
 
 class Leaderboard extends Component {
@@ -25,6 +27,12 @@ class Leaderboard extends Component {
             )
         }
 
+        if (users === undefined) {
+            return (
+                <h3>Loading...</h3>
+            )
+        }
+
         return(
             <div className='leader-board-page'>
                 <div className='nav-panel'>
@@ -35,7 +43,16 @@ class Leaderboard extends Component {
                 <div className='user-avatar-panel'>
                     <UserAvatar />
                 </div>
-                <div className='leader-board-content'>Leader Board</div>
+                <div className='leader-board-content'>
+                    <h3>Leader Board</h3>
+                <ul className='leader-board-list'>
+                    {_.map(users, user => (
+                        <li key={user.id}>
+                            <LeaderBoardList user={user}/>
+                        </li>
+                    ))}
+                </ul>
+                </div>
             </div>
         )
     }

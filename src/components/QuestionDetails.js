@@ -83,7 +83,9 @@ class QuestionDetails extends Component {
                             disabled={_.includes(question.optionOne.votes, authedUser) || _.includes(question.optionTwo.votes, authedUser)}
                             onClick={this.handleSubmit('optionOne')}>
                                 Vote</button>
-                        <span>{`${this.percentage(question.optionOne.votes, question.optionTwo.votes)}% of the votes`}</span>
+                        <div>
+                            <span>{`${this.percentage(question.optionOne.votes, question.optionTwo.votes)}% of the votes`}</span>
+                        </div>
                         <div>
                             <span>Votes: {question.optionOne.votes.length}</span>
                         </div>    
@@ -96,7 +98,9 @@ class QuestionDetails extends Component {
                             disabled={_.includes(question.optionOne.votes, authedUser) || _.includes(question.optionTwo.votes, authedUser)}
                             onClick={this.handleSubmit('optionTwo')}>
                                 Vote</button>
-                        <span>{`${this.percentage(question.optionTwo.votes, question.optionOne.votes)}% of the votes`}</span>
+                        <div>
+                            <span>{`${this.percentage(question.optionTwo.votes, question.optionOne.votes)}% of the votes`}</span>
+                        </div>
                         <div>
                             <span>Votes: {question.optionTwo.votes.length}</span>
                         </div>
