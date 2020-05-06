@@ -2,6 +2,7 @@ import { _getUsers } from '../_DATA'
 
 export const RECEIVE_USERS = 'RECEIVE_USERS'
 export const SAVE_ANSWERS = 'SAVE_ANSWERS'
+export const SAVE_QUESTION_USER = 'SAVE_QUESTION_USER'
 
 export function receiveUsers (users) {
     return {
@@ -16,6 +17,14 @@ export function saveAnswers (authedUser, id, answer) {
         authedUser,
         id,
         answer
+    }
+}
+
+export function saveQuestionUser (author, id) {
+    return {
+        type: SAVE_QUESTION_USER,
+        author,
+        id,
     }
 }
 

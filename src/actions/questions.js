@@ -1,8 +1,9 @@
-import { _getQuestions, _saveQuestionAnswer } from '../_DATA'
-import { saveAnswers } from './users'
+import { _getQuestions, _saveQuestionAnswer, _saveQuestion } from '../_DATA'
+import { saveAnswers, saveQuestionUser } from './users'
 
 export const RECIEVE_QUESTIONS = 'RECIEVE_QUESTIONS'
 export const VOTE_QUESTION = 'VOTE_QUESTION'
+export const SAVE_QUESTION = 'SAVE_QUESTION'
 
 export function recieveQuestions (questions) {
     return {
@@ -20,6 +21,13 @@ export function voteQuestion (authedUser, id, vote) {
     }
 }
 
+export function saveQuestion (question) {
+    return {
+        type: SAVE_QUESTION,
+        question
+    }
+}
+
 export function getQuestions () {
     return (dispatch) => {
         return _getQuestions()
@@ -27,6 +35,16 @@ export function getQuestions () {
                 dispatch(recieveQuestions(questions))
             })
         }
+}
+
+export function sendSaveQuestion (author, optionOne, optionTwo) {
+    return (dispatch) => {
+        return _saveQuestion({ author, optionOne, optionTwo })
+            .then((question) => {
+                dispatch(saveQuestion(question))
+                dispatch(saveQuestionUser(author, question.id))
+            })
+    }
 }
 
 export function sendVoteQuestion (authedUser, qid, answer) {
