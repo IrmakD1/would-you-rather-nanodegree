@@ -8,6 +8,18 @@ import LeaderBoardList from '../components/LeaderBoardList'
 import './Leader-board.css'
 
 class Leaderboard extends Component {
+
+    rankUsers = (users) => {
+        _.forEach(users, user => {
+            let count = 0
+            count = Object.keys(user.answers).length + user.questions.length
+            user.count = count
+        })
+
+        const rankedUsers = _.sortBy(users, [Object.keys(users), 'count']).reverse()
+        return rankedUsers
+    }
+
     render() {
         const { pageTitle, pages, authedUser, users } = this.props
 
@@ -46,7 +58,7 @@ class Leaderboard extends Component {
                 <div className='leader-board-content'>
                     <h3>Leader Board</h3>
                 <ul className='leader-board-list'>
-                    {_.map(users, user => (
+                    {_.map(this.rankUsers(users), user => (
                         <li key={user.id}>
                             <LeaderBoardList user={user}/>
                         </li>

@@ -1,4 +1,5 @@
 import { _getQuestions, _saveQuestionAnswer } from '../_DATA'
+import { saveAnswers } from './users'
 
 export const RECIEVE_QUESTIONS = 'RECIEVE_QUESTIONS'
 export const VOTE_QUESTION = 'VOTE_QUESTION'
@@ -33,6 +34,7 @@ export function sendVoteQuestion (authedUser, qid, answer) {
         return _saveQuestionAnswer({ authedUser, qid, answer })
             .then(() => {
                 dispatch(voteQuestion(authedUser, qid, answer))
+                dispatch(saveAnswers(authedUser, qid, answer))
             })
     }
 }
