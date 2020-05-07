@@ -1,68 +1,77 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Would You Rather Project
 
-In the project directory, you can run:
+This provides users with the ability to log into the app and submit new or vote on existing 'would you rather' questions.
 
-### `npm start`
+## Project Setup
+This project is easy to set up and get going. Simply git clone the repo into your desired folder and then run 'npm i' to install all the dependencies.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+You can run the app with: 'npm run start'
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Logging in
 
-### `npm test`
+This app mocks a login. Users will have to provide one of the 3 existing usernames in order to log in. these include:
+    - johndoe
+    - sarahedo
+    - tylermcginnis
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## What you are getting
+```bash
+├── README.md - This file.
+├── package.json
+├── public
+│   ├── favicon.ico 
+│   └── index.html 
+└── src
+    ├── actions #folder for all actions
+        ├── authedUser.js #sets the authedUser action
+        ├── homeState.js #sets the state of the home page used to show which questions are answered or unanswered
+        ├── questions.js #actions for getting the, saving or voting on questions
+        ├── shared.js #shared actions for fetching the initial data
+        └── users.js #actions for fetching the users
+    ├── components #all the lower level components that are used in the pages
+        ├── form #file for all the components that make up the nav panel
+            ├── Button.css
+            ├── Button.js
+            ├── ButtonGroup.css
+            ├── ButtonGroup.js
+            └── index.js
+        ├── App.css
+        ├── App.js
+        ├── LeaderBoardList.css
+        ├── LeaderBoardList.js
+        ├── LoginForm.css
+        ├── LoginForm.js     
+        ├── NavigationPanel.css
+        ├── NavigationPanel.js   
+        ├── NoMatch.js
+        ├── Question.css
+        ├── Question.js
+        ├── QuestionDetials.css
+        ├── QuestionDetials.js
+        ├── UserAvatar.css
+        └── UserAvatar.js
+    ├── middleware 
+        ├── index.js
+        └── logger.js
+    ├── pages # the high level container components for each of the app pages
+        ├── Home.css
+        ├── Home.js
+        ├── Leader-Board.css
+        ├── Leader-Board.js
+        ├── New-question.css
+        ├── New-question.js     
+        ├── QuestionPage.css
+        └── QuestionPage.js   
+    ├── reducers
+        ├── authedUser.js
+        ├── homeState.js
+        ├── index.js
+        ├── question.js     
+        └── users.js  
+    ├── utils
+        └── index.js #shared functions used throughout the app
+    ├── _DATA.js
+    ├── index.css
+    ├── index.js
