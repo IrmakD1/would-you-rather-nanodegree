@@ -14,7 +14,7 @@ class UserAvatar extends Component {
     }
     
     render() {
-        const { authedUser, avatars } = this.props
+        const { authedUser, avatars, userList } = this.props
         
         if (authedUser === null) {
             return(
@@ -29,7 +29,7 @@ class UserAvatar extends Component {
             alt={`Avatar of ${authedUser}`}
             className='avatar'
             />
-            <p>User: {authedUser}</p>
+            <p>User: {userList.filter(user => user !== null)}</p>
             <button 
                 className='logout-button'
                 onClick={this.handleClick}>
@@ -43,7 +43,8 @@ class UserAvatar extends Component {
 function mapStateToProps ({ authedUser, users }) {
     return {
         authedUser,
-        avatars: _.map(users, user => user.id === authedUser ? user.avatarURL : null)
+        avatars: _.map(users, user => user.id === authedUser ? user.avatarURL : null),
+        userList: _.map(users, user => user.id === authedUser ? user.name : null)
     }
 }
 

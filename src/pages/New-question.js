@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import { sendSaveQuestion } from '../actions/questions'
 import LoginForm from '../components/LoginForm'
 import NavigationPanel from '../components/NavigationPanel'
@@ -11,6 +12,7 @@ class NewQuestion extends Component {
     state = {
         optionOne: '',
         optionTwo: '',
+        redirect: false
     }
 
     handleChangeOne = (e) => {
@@ -32,14 +34,14 @@ class NewQuestion extends Component {
     handleSubmit = (e) => {
         e.preventDefault()    
         const { dispatch, authedUser } = this.props
-        console.log(this.state);
         
 
         dispatch(sendSaveQuestion(authedUser, this.state.optionOne, this.state.optionTwo))
         
         this.setState(() => ({
             optionOne: '',
-            optionTwo: ''
+            optionTwo: '',
+            redirect: true
         }))
 
         console.log(this.state);
@@ -48,7 +50,7 @@ class NewQuestion extends Component {
     
     render() {
         const { authedUser, users, pageTitle, pages } = this.props
-        const { optionOne, optionTwo } = this.state
+        const { optionOne, optionTwo, redirect } = this.state
 
         console.log(this.state);
         
@@ -67,6 +69,10 @@ class NewQuestion extends Component {
                     </div>
             </div>
             )
+        }
+
+        if (redirect === true) {
+            return <Redirect to='/'/>
         }
 
         return(

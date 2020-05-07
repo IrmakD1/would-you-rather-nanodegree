@@ -65,6 +65,38 @@ class QuestionDetails extends Component {
                 return (
                     <NoMatch/>
                 )
+            } else if (!(_.includes(question.optionOne.votes, authedUser)) && !(_.includes(question.optionTwo.votes, authedUser))) {
+                return (
+                    <div className='question-box'>
+                    <div className='author'>
+                        <img  
+                        src={this.authorAvatar(users, question)}
+                        alt={`Avatar of ${authedUser}`}
+                        className='author-avatar'/>
+                        <span>created by: {question.author}</span>
+                    </div>
+                    <h5>Would You Rather?</h5>
+                    <div>
+                        <p>{question.optionOne.text}</p>
+                        <button 
+                            className={`button-is-${this.checkStyle(question.optionOne, authedUser)}`}
+                            disabled={_.includes(question.optionOne.votes, authedUser) || _.includes(question.optionTwo.votes, authedUser)}
+                            onClick={this.handleSubmit('optionOne')}>
+                                Vote</button>   
+                    </div>
+                        <p>OR</p>
+                    <div>
+                        <p>{question.optionTwo.text}</p>
+                        <button 
+                            className={`button-is-${this.checkStyle(question.optionTwo, authedUser)}`}
+                            disabled={_.includes(question.optionOne.votes, authedUser) || _.includes(question.optionTwo.votes, authedUser)}
+                            onClick={this.handleSubmit('optionTwo')}>
+                                Vote</button>
+                    </div>
+                    <div></div>
+                    <div className='date'>{formatDate(question.timestamp)}</div>
+                </div>
+                )
             } else {
                 return (
                     <div className='question-box'>
